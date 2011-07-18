@@ -1,0 +1,39 @@
+	<style>
+	body {
+	  min-width:357px;
+	  height: 200px;
+	  overflow-x:hidden;
+	}
+	
+	img {
+	  margin:5px;
+	  border:2px solid black;
+	  vertical-align:middle;
+	  width:75px;
+	  height:75px;
+	}
+	</style>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script type=text/javascript>
+		function dop(){
+			var jsonUrl = "http://danielhmoore.com:1337";  
+			//$("#test").load("http://danielhmoore.com:1337"); 
+			
+			$.getJSON(  
+                jsonUrl,  
+                '',  
+                function(json) {  
+                	console.log("made it here");
+                    var result = "Language code is \"<strong>" + json.responseData.reveiwer + "\"";  
+                    $("#test").html(result);  
+                }  
+            ); 
+		}
+		
+	</script>
+<body>
+	<div id="test">
+		Blah Blah Blah
+	</div>
+	<input type=button value='Submit' onclick="dop();"/>
+</body>
