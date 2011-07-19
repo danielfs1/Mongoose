@@ -4,6 +4,7 @@ var sys = require('sys');
 var exec = require('child_process').exec;
 var fs = require('fs');
 var temp = "";
+
 //Start Logged
 var log2 = fs.createWriteStream('log.txt', {'flags': 'a'});
 log("Opening Log Stream");
@@ -27,10 +28,6 @@ var disk = temp;
 //Set up the JSON
 var info = '{"uptime" : "' + uptime + '", "meminfo" : "'+memory+'","diskinfo" : "'+disk+'"}';
 var jsonobj = eval('(' + info + ')');
-
-//Get Uptime
-function puts(error, stdout, stderr) { uptime = stdout }
-exec('uptime', puts);
 
 http.createServer(function (req, res) {
   //Log about new connection
@@ -58,4 +55,4 @@ function log(text) {
 }
 
 //Function for executing commands
-function puts(error, stdout, stderr) { temp = stdout }
+function puts(error, stdout, stderr) { console.log(stdout); temp = stdout }
