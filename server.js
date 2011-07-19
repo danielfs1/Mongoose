@@ -14,15 +14,15 @@ var address = "0.0.0.0";
 
 //Get Uptime
 var uptime = "";
-uptime = exec('uptime', puts);
+exec('uptime', uptime = puts);
 
 //Get Memory Info
 var memory = "";
-memory = exec('free -m', puts);
+exec('free -m', memory = puts);
 
 //Get Disk Info
 var disk = "";
-disk = exec('df -H');
+exec('df -H', disk = puts);
 
 //Set up the JSON
 var info = '{"uptime" : "' + uptime + '", "meminfo" : "'+memory+'","diskinfo" : "'+disk+'"}';
