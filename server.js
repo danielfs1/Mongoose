@@ -58,4 +58,4 @@ function log(text) {
 }
 
 //Function for executing commands
-function puts(error, stdout, stderr) { return stdout }
+function puts(error, stdout, stderr) { temp = stdout }
