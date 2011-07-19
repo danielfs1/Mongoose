@@ -53,7 +53,7 @@ log("Server has started at http://" + adddress + ":" + port);
 function log(text) {
 	var currentTime = new Date();
 	var timestamp = currentTime.getHours() + ':' + currentTime.getMinutes() + ':' + currentTime.getSeconds();
-	log.write(timestamp + "--" + text);
+	log2.write(timestamp + "--" + text);
 	console.log(timestamp + "--" + text)
 }
 
