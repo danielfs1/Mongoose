@@ -26,7 +26,7 @@ disk = exec('df -H');
 
 //Set up the JSON
 var info = '{"uptime" : "' + uptime + '", "meminfo" : "'+memory+'","diskinfo" : "'+disk+'"}';
-var jsonobj = JSON.parse(info);
+var jsonobj = eval('(' + info + ')');
 
 //Get Uptime
 function puts(error, stdout, stderr) { uptime = stdout }
