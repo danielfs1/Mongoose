@@ -3,7 +3,7 @@ var http = require('http');
 var sys = require('sys');
 var exec = require('child_process').exec;
 var fs = require('fs');
-
+var temp = "";
 //Start Logged
 var log2 = fs.createWriteStream('log.txt', {'flags': 'a'});
 log("Opening Log Stream");
@@ -13,16 +13,16 @@ var port = "1337";
 var address = "0.0.0.0";
 
 //Get Uptime
-var uptime = "";
-exec('uptime', uptime = puts);
+exec('uptime', puts);
+var uptime = temp;
 
 //Get Memory Info
-var memory = "";
-exec('free -m', memory = puts);
+exec('free -m', puts);
+var memory = temp;
 
 //Get Disk Info
-var disk = "";
-exec('df -H', disk = puts);
+exec('df -H', puts);
+var disk = temp;
 
 //Set up the JSON
 var info = '{"uptime" : "' + uptime + '", "meminfo" : "'+memory+'","diskinfo" : "'+disk+'"}';
