@@ -12,7 +12,9 @@
                 	//console.log("made it here");
                 	//console.log(json);
                     var result = json;  
-                    $("#test").html(result["reviewer"]);
+                    $(".uptime").html(result["uptime"]);
+                    $(".meminfo").html(result["meminfo"]);
+                    $(".diskinfo").html(result["diskinfo"]);
                     
                      
                      
@@ -28,7 +30,9 @@
 		</div>
 		
 		<div class="content">
-			Blah Blah Blah
+			<div class="uptime"></div>
+			<div class="meminfo"></div>
+			<div class="diskinfo"></div>
 		</div>
 		
 		<div class="footer">

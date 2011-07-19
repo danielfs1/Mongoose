@@ -14,11 +14,18 @@ var address = "0.0.0.0";
 
 //Get Uptime
 var uptime = "";
-function puts(error, stdout, stderr) { uptime = stdout }
-exec('uptime', puts);
+uptime = exec('uptime', puts);
+
+//Get Memory Info
+var memory = "";
+memory = exec('free -m', puts);
+
+//Get Disk Info
+var disk = "";
+disk = exec('df -H');
 
 //Set up the JSON
-var info = '{"uptime": "' + uptime + '"}';
+var info = '{"uptime" : "' + uptime + '", "meminfo" : "'+memory+'","diskinfo" : "'+disk+'"}';
 var jsonobj = JSON.parse(info);
 
 //Get Uptime
@@ -49,3 +56,6 @@ function log(text) {
 	log.write(timestamp + "--" + text);
 	console.log(timestamp + "--" + text)
 }
+
+//Function for executing commands
+function puts(error, stdout, stderr) { return stdout }
