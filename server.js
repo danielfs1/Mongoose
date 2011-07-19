@@ -47,7 +47,7 @@ http.createServer(function (req, res) {
 }).listen(port, address);
 
 //Notify the people that the server is alive
-log("Server has started at http://" + adddress + ":" + port);
+log("Server has started at http://" + address + ":" + port);
 
 //Function for logging
 function log(text) {
