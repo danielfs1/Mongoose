@@ -5,7 +5,7 @@ var exec = require('child_process').exec;
 var fs = require('fs');
 
 //Start Logged
-var log = fs.createWriteStream('log.txt', {'flags': 'a'});
+var log2 = fs.createWriteStream('log.txt', {'flags': 'a'});
 log("Opening Log Stream");
 
 //Server Info
