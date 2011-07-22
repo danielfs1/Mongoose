@@ -16,9 +16,9 @@
                 	$(".refresh").html("<img src='images/loading.gif' width='20' height='20'/>");
                 	setTimeout("loading()", 2000);
                     var result = json;  
-                    $(".uptime").html(result["uptime"]);
-                    $(".meminfo").html(result["meminfo"]);
-                    $(".diskinfo").html(result["diskinfo"]);
+                    $('.uptime').html(result['uptime']);
+                    $('.meminfo').html(result['meminfo']);
+                    $('.diskinfo').html(result['diskinfo']);
        
                     setTimeout("getUpdatedTime()", 2000);
                 }) 
@@ -60,6 +60,7 @@
 			<div class="navbar">
 				<a href="#" class="left pill button">sabnzbd</a><a href="#" class="middle pill button">Sick Beard</a><a href="#" class="right pill button">Couch Potato</a>
 			</div>
+		</br>
 			<div class="uptime"></div>
 			<div class="meminfo"></div>
 			<div class="diskinfo"></div>

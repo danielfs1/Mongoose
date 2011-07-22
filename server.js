@@ -26,7 +26,7 @@ http.createServer(function (req, res) {
 			exec('uptime', function(stdin, stdout, stderr) {
 				log("Getting current uptime...");
 
-				response_json["uptime"] = uptime;
+				response_json["uptime"] = stdout;
 				//call callback, this fakes syncronisity
 				callback();
 			});	
