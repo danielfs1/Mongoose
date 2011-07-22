@@ -46,6 +46,7 @@ img {
 }
 .name {
 	float:left;
-	font-weight: 20px;
-	font-size: bold;
+	font-weight: bold;
+	font-size: 20px;
+	height:24px;
 }
