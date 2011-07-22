@@ -3,8 +3,8 @@ var http = require('http');
 var sys = require('sys');
 var exec = require('child_process').exec;
 var fs = require('fs');
-var temp = "";
-var uptime = "";
+
+var async = require('async');
 
 //Start Logged
 var log2 = fs.createWriteStream('log.txt', {'flags': 'a'});
@@ -14,31 +14,49 @@ log("Opening Log Stream");
 var port = "1337";
 var address = "0.0.0.0";
 
-//Get Uptime
-setTimeout(exec('uptime', puts));
-setTimeout(uptime = temp, 3000);
-
-//Get Memory Info
-exec('free -m', puts);
-var memory = temp;
-
-//Get Disk Info
-exec('df -H', puts);
-var disk = temp;
-
-//Set up the JSON
-var info = '{"uptime" : "' + uptime + '", "meminfo" : "'+memory+'","diskinfo" : "'+disk+'"}';
-var jsonobj = eval('(' + info + ')');
-
 http.createServer(function (req, res) {
   //Log about new connection
   log("New Connection");
   //log(req.headers);
-  
-  //Send the client info in json form
-  res.writeHead(200, {'Content-Type': 'application/json'});
-  res.write(JSON.stringify(jsonobj));
-  res.end("");
+	var response_json = {};
+	async.series([
+		//anon func for each command, adding callback() to each func to ensure it doesn't move on until we are ready
+		// get uptime
+		function(callback) {
+			//get uptime
+			exec('uptime', function(stdin, stdout, stderr) {
+				log("Getting current uptime...");
+
+				response_json["uptime"] = uptime;
+				//call callback, this fakes syncronisity
+				callback();
+			});	
+		},
+		// get meminfo
+		function(callback) {
+			exec('free -m', function(stdin, stdout, stderr) {
+				log("Getting memory info...");
+
+				response_json["meminfo"] = stdout;
+				callback();
+			});
+		},
+		//get diskinfo
+		function(callback) {
+			exec('df -H', function(stdin, stdout, stderr) {
+				log("Getting diskinfo");
+
+				response_json["diskinfo"] = stdout;
+				callback();
+			});
+		}
+	], function(err, results) {
+		res.writeHead(200, {'Content-Type': 'application/json'});
+		res.write(JSON.stringify(response_json));
+		res.end("");
+
+		log("end of request");
+	});
   
   //Log connection done
   log("Connection Closed");
