@@ -2,41 +2,61 @@
 	<link rel="stylesheet" type="text/css" href="main.css" />
 	<script type=text/javascript>
 		function dop(){
-			var jsonUrl = "http://danielhmoore.com:1337";  
-			//$("#test").load("http://danielhmoore.com:1337"); 
+			var jsonUrl = "http://localhost:1337";  
+			//$("#test").load("http://localhost:1337"); 
+			$(".error").html("");
+            $(".success").html("");
 			
 			$.getJSON(  
                 jsonUrl,  
                 null,  
                 function(json) {  
-                	//console.log("made it here");
+                	console.log("made it here");
                 	//console.log(json);
+                	$(".refresh").html("<img src='loading.gif' width='20' height='20'/>");
+                	//var temp = "<img src
+                	setTimeout("replace()", 2000);
                     var result = json;  
                     $(".uptime").html(result["uptime"]);
                     $(".meminfo").html(result["meminfo"]);
                     $(".diskinfo").html(result["diskinfo"]);
-                    
-                     
-                     
-                }  
-            ); 
+                }) 
+            .error(function() { $(".error").html("Unable to connect") })
+            .success(function() { $(".success").html("Connection Success") }); 
 		}
+		
+		function replace() {
+			$(".refresh").html("<img src='refresh.jpg' width='20' height='20' onclick='dop()'/>");
+			console.log("here");
+		}
+		
+		$(document).ready(function() {
+  			dop();
+		});
 		
 	</script>
 <body>
 	<div id="container">
 		<div class="header">
-			<h2>Silver Mongoose</h2>
+			<div class="name">
+				<h2>Silver Mongoose</h2>
+			</div>
+			<div class="refresh">
+				<img src="refresh.jpg" alt="Refresh" width="20" height="20" onclick="dop();"/>
+			</div>
 		</div>
 		
 		<div class="content">
+			<div class="message">
+				<div class="success"></div>
+				<div class="error"></div>
+			</div>
 			<div class="uptime"></div>
 			<div class="meminfo"></div>
 			<div class="diskinfo"></div>
 		</div>
 		
 		<div class="footer">
-			<input type=button value='Submit' onclick="dop();"/>
 		</div>
 	</div>
 </body>

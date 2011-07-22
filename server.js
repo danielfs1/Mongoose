@@ -4,7 +4,7 @@ var sys = require('sys');
 var exec = require('child_process').exec;
 var fs = require('fs');
 var temp = "";
-
+var uptime = "";
 //Start Logged
 var log2 = fs.createWriteStream('log.txt', {'flags': 'a'});
 log("Opening Log Stream");
@@ -14,8 +14,9 @@ var port = "1337";
 var address = "0.0.0.0";
 
 //Get Uptime
-exec('uptime', puts);
-var uptime = temp;
+setTimeout(exec('uptime', puts));
+setTimeout(uptime = temp, 3000);
+
 
 //Get Memory Info
 exec('free -m', puts);
@@ -32,7 +33,7 @@ var jsonobj = eval('(' + info + ')');
 http.createServer(function (req, res) {
   //Log about new connection
   log("New Connection");
-  log(req.headers);
+  //log(req.headers);
   
   //Send the client info in json form
   res.writeHead(200, {'Content-Type': 'application/json'});
@@ -55,4 +56,4 @@ function log(text) {
 }
 
 //Function for executing commands
-function puts(error, stdout, stderr) { console.log(stdout); temp = stdout }
+function puts(error, stdout, stderr) { this.temp = String(stdout); console.log("temp: " + this.temp); }

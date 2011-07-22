@@ -7,6 +7,6 @@
     "popup": "popup.html"
   },
   "permissions": [
-    "http://api.flickr.com/", "http://danielhmoore.com/"
+    "http://api.flickr.com/", "http://danielhmoore.com/", "http://localhost/"
   ]
 }
