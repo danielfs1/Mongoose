@@ -5,6 +5,7 @@ var exec = require('child_process').exec;
 var fs = require('fs');
 var temp = "";
 var uptime = "";
+
 //Start Logged
 var log2 = fs.createWriteStream('log.txt', {'flags': 'a'});
 log("Opening Log Stream");
@@ -16,7 +17,6 @@ var address = "0.0.0.0";
 //Get Uptime
 setTimeout(exec('uptime', puts));
 setTimeout(uptime = temp, 3000);
-
 
 //Get Memory Info
 exec('free -m', puts);
