@@ -23,7 +23,7 @@ http.createServer(function (req, res) {
 		// get uptime
 		function(callback) {
 			//get uptime
-			exec('uptime', function(stdin, stdout, stderr) {
+			exec("uptime | awk '{print $3}'", function(stdin, stdout, stderr) {
 				log("Getting current uptime...");
 
 				response_json["uptime"] = stdout;
@@ -31,21 +31,39 @@ http.createServer(function (req, res) {
 				callback();
 			});	
 		},
-		// get meminfo
+		// get totalMem
 		function(callback) {
-			exec('free -m', function(stdin, stdout, stderr) {
-				log("Getting memory info...");
+			exec("free -mto | grep Mem | awk '{print $2}'", function(stdin, stdout, stderr) {
+				log("Getting total memory info...");
 
-				response_json["meminfo"] = stdout;
+				response_json["totalMem"] = stdout;
 				callback();
 			});
 		},
-		//get diskinfo
+		// get freeMem
 		function(callback) {
-			exec('df -H', function(stdin, stdout, stderr) {
-				log("Getting diskinfo");
+			exec("free -mto | grep Mem | awk '{print $4}'", function(stdin, stdout, stderr) {
+				log("Getting  free memory info...");
 
-				response_json["diskinfo"] = stdout;
+				response_json["freeMem"] = stdout;
+				callback();
+			});
+		},
+		// get usedMem
+		function(callback) {
+			exec("free -mto | grep Mem | awk '{print $3}'", function(stdin, stdout, stderr) {
+				log("Getting used memory info...");
+
+				response_json["usedMem"] = stdout;
+				callback();
+			});
+		},
+		//get hostname
+		function(callback) {
+			exec('hostname', function(stdin, stdout, stderr) {
+				log("Getting hostname");
+
+				response_json["hostname"] = stdout;
 				callback();
 			});
 		}
@@ -68,8 +86,8 @@ log("Server has started at http://" + address + ":" + port);
 function log(text) {
 	var currentTime = new Date();
 	var timestamp = currentTime.getHours() + ':' + currentTime.getMinutes() + ':' + currentTime.getSeconds();
-	log2.write(timestamp + "--" + text);
-	console.log(timestamp + "--" + text)
+	log2.write(timestamp + "--" + text + "\n");
+	console.log(timestamp + "--" + text);
 }
 
 //Function for executing commands

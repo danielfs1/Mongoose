@@ -17,8 +17,10 @@
                 	setTimeout("loading()", 2000);
                     var result = json;  
                     $('.uptime').html(result['uptime']);
-                    $('.meminfo').html(result['meminfo']);
-                    $('.diskinfo').html(result['diskinfo']);
+                    $('.totalMem').html(result['totalMem']);
+                    $('.usedMem').html(result['usedMem']);
+                    $('.freeMem').html(result['freeMem']);
+                    $('.hostname').html(result['hostname']);
        
                     setTimeout("getUpdatedTime()", 2000);
                 }) 
@@ -40,6 +42,24 @@
   			pingServer();
 		});
 		
+		function openSab() {
+			chrome.tabs.create({'url': 'http://silvermongoose:9090'}, function(tab) {
+              // Tab opened.
+			});
+		}
+		
+		function openSickBeard() {
+			chrome.tabs.create({'url': 'http://silvermongoose:8081'}, function(tab) {
+              // Tab opened.
+			});
+		}
+		
+		function openCouchPotato() {
+			chrome.tabs.create({'url': 'http://silvermongoose:5000'}, function(tab) {
+              // Tab opened.
+			});
+		}
+		
 	</script>
 <body>
 	<div id="container">
@@ -58,12 +78,24 @@
 			</div>
 			<hr>
 			<div class="navbar">
-				<a href="http://silvermongoose:9090" class="left pill button">sabnzbd</a><a href="#" class="middle pill button">Sick Beard</a><a href="#" class="right pill button">Couch Potato</a>
+				<a href="http://silvermongoose:9090" class="left pill button" onclick="openSab();">sabnzbd</a><a href="#" class="middle pill button" onclick="openSickBeard();">Sick Beard</a><a href="#" class="right pill button" onclick="openCouchPotato();">Couch Potato</a>
 			</div>
-		</br>
-			<div class="uptime"></div>
-			<div class="meminfo"></div>
-			<div class="diskinfo"></div>
+		<br/>
+			<div class="">
+				<strong>Uptime:</strong>&nbsp;
+				<span class="uptime"></span><br/>
+				<strong>Hostname:</strong>&nbsp;
+				<span class="hostname"></span><br/>
+			</div>
+			<br/>
+			<div class="meminfo">
+				<strong>Total Memory:</strong>&nbsp; 
+				<span class="totalMem"></span><br/>
+				<strong>Used Memory:</strong>&nbsp; 
+				<span class="usedMem"></span><br/>
+				<strong>Free Memory:</strong>&nbsp;
+				<span class="freeMem"></span><br/>
+			</div>
 		</div>
 		
 		<div class="footer">
